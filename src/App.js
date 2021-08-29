@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import Middle from './Middle';
+import { useState } from 'react';
+import Note from './Note';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Agg = () =>{
+    const [input, setInput]=useState({
+        title : "",
+        text : ""
+    });
+
+    const [add, setAdd]=useState([]);
+return(
+        <>
+        <div className="main">
+        <Header />
+        <Middle add={add} setAdd={setAdd} input={input} setInput={setInput} />
+
+        {add.map((elem ,index)=>{
+            return(
+                <Note title={elem.title} 
+                text={elem.text} 
+                key={index} 
+                id={index} 	
+                setAdd={setAdd} 
+                add={add} 
+                input={input}
+                setInput={setInput} 
+                 />
+            );
+        })}
+
+        <Footer />
+        </div>
+        </>
+    );
 }
+export default Agg;
 
-export default App;
+
